@@ -9,20 +9,23 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String p;
-        TipoTransacao tipo;
+        TipoTransacao tipo = null;
         int cont = 0;
+        Transacao[] maximo = new Transacao[10];
 
         do{
             System.out.println("=======Gerenciador Financeiro=======");
             System.out.println("Transações :");
+
             System.out.printf("Nova transação S/N : ");
-            p = scanner.next().toUpperCase();
-            if (p == "S"){
+            p = scanner.next();
+            if (p.equalsIgnoreCase("S")){
                 if(cont < 10) {
                     System.out.println("Cadastro de transação :");
                     System.out.printf("Descrição: ");
-                    String descricao = scanner.next();
-                    System.out.printf("Valor : ");
+                    scanner.nextLine();
+                    String descricao = scanner.nextLine();
+                    System.out.printf("Valor : R$ ");
                     double valor = scanner.nextDouble();
                     LocalDate data = LocalDate.now();
                     String rd;
@@ -30,28 +33,28 @@ public class Main {
                     do {
                         System.out.printf(
                                 "Tipo :" +
-                                        "R - Receita" +
-                                        "R - Despesa"
+                                        "R - Receita\n" +
+                                        "D - Despesa"
                         );
-                        rd = scanner.next().toUpperCase();
-                        if (rd == "R") {
+                        rd = scanner.next();
+                        if (rd.equalsIgnoreCase("R")) {
                             tipo = TipoTransacao.RECEITA;
-                        } else if (rd == "D") {
+                        } else if (rd.equalsIgnoreCase("D")) {
                             tipo = TipoTransacao.DESPESA;
                         } else {
                             System.out.printf("Opção inválida");
                         }
-                    } while (rd != "R" || rd != "D");
+                    } while (!(rd.equalsIgnoreCase("R")|| rd.equalsIgnoreCase("D")));
 
-                    Transacao[] transacao = new Transacao[10];
+                    maximo[cont] = new Transacao(descricao,valor,data,tipo);
                     cont++;
                 }
-            } else if (p == "N") {
+            } else if (p.equalsIgnoreCase("N")) {
                 System.out.println("Até a proxima");
             }else {
-                System.out.println("Digíte um número válido");
+                System.out.println("Digíte uma opção válida");
             }
-        }while (p != "N");
+        }while (!(p.equalsIgnoreCase("N")));
 
     }
 }
