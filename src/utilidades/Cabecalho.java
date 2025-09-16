@@ -26,7 +26,6 @@ public class Cabecalho {
         for (int i = 0; i<largura;i++){
             System.out.print("=");
         }
-        System.out.println();
     }
 
 }
