@@ -1,22 +1,35 @@
 import transacao.TipoTransacao;
 import transacao.Transacao;
-import usuario.User;
+import utilidades.Cabecalho;
 
 import java.time.LocalDate;
 import java.util.*;//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String p;
         TipoTransacao tipo = null;
         int cont = 0;
-        Transacao[] maximo = new Transacao[10];
+        Transacao maximo[] = new Transacao[10];
+
+
 
         do{
-            System.out.println("=======Gerenciador Financeiro=======");
+            new Cabecalho("Gerênciador financero",50);
             System.out.println("Transações :");
-
+            for (Transacao i: maximo){
+                if (i != null) {
+                    System.out.printf("Descrição : %s\n",i.getDescricao());
+                    System.out.printf("Valor : R$ %.2f\n",i.getValor());
+                    System.out.printf("Data : %s\n",i.getData());
+                    System.out.printf("Tipo : %s\n",i.getTipo());
+                }
+            }
+            if (maximo[0] != null){
+                System.out.println("=================================");
+            }
             System.out.printf("Nova transação S/N : ");
             p = scanner.next();
             if (p.equalsIgnoreCase("S")){
@@ -31,11 +44,7 @@ public class Main {
                     String rd;
 
                     do {
-                        System.out.printf(
-                                "Tipo :" +
-                                        "R - Receita\n" +
-                                        "D - Despesa"
-                        );
+                        System.out.printf("Tipo :\nR - Receita\nD - Despesa\nOpção : ");
                         rd = scanner.next();
                         if (rd.equalsIgnoreCase("R")) {
                             tipo = TipoTransacao.RECEITA;
